@@ -1,0 +1,130 @@
+
+<div class="container py-5 main-container page-background">
+
+  <div class="page-header d-flex justify-content-between align-items-center gap-3 flex-wrap">
+
+    <div class="page-header-content">
+
+      <h2 class="page-header-title">
+        Task List
+      </h2>
+
+      <p class="page-header-description">
+        Manage your tasks easily
+      </p>
+
+    </div>
+
+    <a
+      mat-raised-button
+      color="primary"
+      routerLink="/add-task"
+      class="primary-button add-task-button"
+    >
+      <mat-icon class="button-icon">
+        add
+      </mat-icon>
+
+      Add Task
+    </a>
+
+  </div>
+
+
+  <div class="row g-4">
+
+    @for (task of taskService.tasks(); track task.id) {
+
+      <div class="col-12 col-md-6 col-lg-4">
+
+        <mat-card
+          class="task-card"
+          [routerLink]="['/task', task.id]"
+        >
+
+          <mat-card-content class="task-card-content">
+
+            <div class="task-card-header d-flex justify-content-between align-items-start gap-3 mb-3">
+
+              <div class="d-flex align-items-center gap-3 task-card-title-wrapper">
+
+                <div class="task-icon">
+
+                  <mat-icon>
+                    task_alt
+                  </mat-icon>
+
+                </div>
+
+                <div class="task-card-title-wrapper">
+
+                  <h5 class="task-card-title">
+                    {{ task.title }}
+                  </h5>
+
+                </div>
+
+              </div>
+
+
+              @if (task.completed) {
+
+                <mat-chip class="completed-chip ">
+
+                  <mat-icon class="completed-icon">
+                    check_circle
+                  </mat-icon>
+
+                  Completed
+
+                </mat-chip>
+
+              } @else {
+
+                <mat-chip class="pending-chip">
+
+                  <mat-icon class="pending-icon">
+                    schedule
+                  </mat-icon>
+
+                  Pending
+
+                </mat-chip>
+
+              }
+
+            </div>
+
+
+            <mat-divider class="task-divider"></mat-divider>
+
+
+            <p class="task-description">
+              {{ task.desc }}
+            </p>
+
+
+            <div class="task-card-footer">
+
+              <span class="view-task-text">
+                View task
+              </span>
+
+              <mat-icon class="view-task-icon">
+                arrow_forward
+              </mat-icon>
+
+            </div>
+
+          </mat-card-content>
+
+        </mat-card>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
+

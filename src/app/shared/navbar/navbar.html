@@ -1,0 +1,63 @@
+
+<nav class="navbar navbar-expand-lg app-navbar">
+
+  <div class="container navbar-container">
+
+    <a
+      class="navbar-brand app-navbar-brand"
+      routerLink="/"
+    >
+      Task Manager
+    </a>
+
+    <button
+      class="navbar-toggler app-navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse app-navbar-collapse"
+      id="navbarNav"
+    >
+
+      <ul class="navbar-nav ms-auto app-navbar-nav">
+
+        <li class="nav-item app-navbar-item">
+
+          <a
+            class="nav-link app-navbar-link"
+            routerLink="/"
+            routerLinkActive="app-navbar-link-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Task List
+          </a>
+
+        </li>
+
+        <li class="nav-item app-navbar-item">
+
+          <a
+            class="nav-link app-navbar-link"
+            routerLink="/add-task"
+            routerLinkActive="app-navbar-link-active"
+          >
+            Add Task
+          </a>
+
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</nav>

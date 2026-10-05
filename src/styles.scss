@@ -1,0 +1,490 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  height: 100%;
+}
+/* root code*/
+
+:root {
+  --color-primary: #4f46e5;
+  --color-primary-dark: #4338ca;
+  --color-secondary: #7c3aed;
+  --color-background: #f5f7fb;
+  --color-white: #ffffff;
+  --color-text: #1f2937;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-success: #15803d;
+  --color-success-bg: #dcfce7;
+  --color-warning: #b45309;
+  --color-warning-bg: #fef3c7;
+  --color-error: #ef4444;
+  --color-light-purple: #f8f9ff;
+  --color-hover-purple: #eef2ff;
+  --color-scrollbar: #b7b7d9;
+}
+
+.page-background {
+  background-color: var(--color-background);
+  min-height: 100vh;
+}
+
+.main-container {
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.page-header {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  color: var(--color-white);
+  padding: 1.75rem;
+  border-radius: 1.125rem;
+  margin-bottom: 1.875rem;
+  box-shadow: 0 0.625rem 1.875rem rgba(79, 70, 229, 0.18);
+}
+
+.page-header-title {
+  color: var(--color-white);
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.page-header-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.task-card {
+  height: 100%;
+  border: 0 !important;
+  border-radius: 1.125rem !important;
+  background-color: var(--color-white);
+  box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.task-card:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: 0 0.75rem 1.875rem rgba(79, 70, 229, 0.15);
+}
+
+.task-card-content {
+  padding: 1.5rem;
+}
+
+.task-card-header {
+  min-width: 0;
+}
+
+.task-card-title-wrapper {
+  min-width: 0;
+  flex: 1;
+}
+
+.task-card-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  word-break: break-word;
+}
+
+.task-icon {
+  width: 3rem;
+  height: 3rem;
+  min-width: 3rem;
+  border-radius: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  color: var(--color-white);
+}
+
+.task-icon mat-icon {
+  margin: 0;
+}
+
+.completed-chip {
+  background-color: var(--color-success-bg) !important;
+  color: var(--color-success) !important;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.completed-icon {
+  color: var(--color-success);
+}
+
+.pending-chip {
+  background-color: var(--color-warning-bg) !important;
+  color: var(--color-warning) !important;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.pending-icon {
+  color: #f59e0b;
+}
+
+.task-divider {
+  margin: 0;
+}
+
+.task-description {
+  max-height: 6.5625rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin: 1rem 0 1.5rem;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.task-description::-webkit-scrollbar {
+  width: 0.3125rem;
+}
+
+.task-description::-webkit-scrollbar-track {
+  background-color: var(--color-background);
+  border-radius: 0.625rem;
+}
+
+.task-description::-webkit-scrollbar-thumb {
+  background-color: var(--color-scrollbar);
+  border-radius: 0.625rem;
+}
+
+.task-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.view-task-text {
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.view-task-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  font-size: 1.125rem;
+  transition: transform 0.2s ease;
+}
+
+.task-card:hover .view-task-icon {
+  transform: translateX(0.25rem);
+}
+
+.details-card {
+  border: 0 !important;
+  border-radius: 1.125rem !important;
+  background-color: var(--color-white);
+  box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+.details-header {
+  padding: 1.5rem;
+}
+
+.details-header-content {
+  width: 100%;
+}
+
+.details-header-title {
+  color: var(--color-text);
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.details-header-subtitle {
+  color: var(--color-muted);
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+}
+
+.details-content {
+  padding: 1.5rem;
+}
+
+.details-title-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+  margin-bottom: 1.5rem;
+}
+
+.details-title-wrapper {
+  min-width: 0;
+}
+
+.details-title {
+  color: var(--color-text);
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  word-break: break-word;
+}
+
+.details-task-id {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.section-title {
+  color: var(--color-text);
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.details-description {
+  max-height: 10rem;
+  overflow-y: auto;
+  color: var(--color-muted);
+  margin: 0;
+  padding-right: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1rem;
+  border-radius: 0.875rem;
+  background-color: var(--color-light-purple);
+  border: 0.0625rem solid var(--color-border);
+  transition: 0.2s ease;
+}
+
+.info-box:hover {
+  background-color: var(--color-hover-purple);
+  border-color: #c7d2fe;
+}
+
+.info-icon {
+  color: var(--color-primary);
+}
+
+.info-label {
+  display: block;
+  color: var(--color-muted);
+  margin-bottom: 0.125rem;
+  font-size: 0.75rem;
+}
+
+.info-value {
+  color: var(--color-text);
+  font-size: 0.9375rem;
+}
+
+.details-actions {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.primary-button {
+  min-height: 2.75rem;
+  border-radius: 0.625rem !important;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  ) !important;
+  color: var(--color-white) !important;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-0.0625rem);
+}
+
+.button-icon {
+  margin-right: 0.375rem;
+}
+
+.form-card {
+  border: 0 !important;
+  border-radius: 1.125rem !important;
+  background-color: var(--color-white);
+  box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.07);
+}
+
+.form-card-body {
+  padding: 1.5rem;
+}
+
+.form-title {
+  color: var(--color-text);
+  margin: 0 0 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.form-checkbox-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.form-checkbox {
+  color: var(--color-text);
+}
+
+.form-submit-button {
+  width: 100%;
+  min-height: 2.75rem;
+  border-radius: 0.625rem !important;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  ) !important;
+  color: var(--color-white) !important;
+  font-weight: 600;
+}
+
+.error-card {
+  border: 0 !important;
+  border-radius: 1.125rem !important;
+  background-color: var(--color-white);
+  box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.07);
+}
+
+.error-card-content {
+  padding: 3rem;
+  text-align: center;
+}
+
+.error-icon {
+  width: 4rem;
+  height: 4rem;
+  font-size: 4rem;
+  color: var(--color-error);
+}
+
+.error-title {
+  color: var(--color-text);
+  margin: 1rem 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.error-description {
+  color: var(--color-muted);
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 36rem) {
+  .main-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .page-header {
+    padding: 1.25rem;
+    border-radius: 0.875rem;
+  }
+
+  .page-header-title {
+    font-size: 1.5rem;
+  }
+
+  .task-card {
+    border-radius: 0.875rem !important;
+  }
+
+  .task-icon {
+    width: 2.625rem;
+    height: 2.625rem;
+    min-width: 2.625rem;
+  }
+
+  .details-title-section {
+    align-items: flex-start;
+  }
+
+  .details-title {
+    font-size: 1.375rem;
+  }
+
+  .error-card-content {
+    padding: 2rem 1.25rem;
+  }
+}
+
