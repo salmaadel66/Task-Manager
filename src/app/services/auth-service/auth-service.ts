@@ -1,5 +1,5 @@
 
-import { Injectable, signal } from '@angular/core';
+import { DestroyRef, Injectable, inject, signal } from '@angular/core';
 
 import {
   User,
@@ -73,11 +73,15 @@ export class AuthService {
   ready: Promise<void>;
 
   constructor() {
+    const destroyRef = inject(DestroyRef);
+
     this.ready = new Promise<void>(resolve => {
-      onAuthStateChanged(auth, user => {
+      const unsubscribe = onAuthStateChanged(auth, user => {
         this.user.set(user);
         resolve();
       });
+
+      destroyRef.onDestroy(unsubscribe);
     });
   }
 

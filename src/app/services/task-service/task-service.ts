@@ -3,6 +3,7 @@ import { Injectable, PLATFORM_ID, effect, inject, signal } from '@angular/core';
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { AuthService } from '../auth-service/auth-service';
+const STORAGE_KEY = 'tasks';
 
 export interface Task {
   id: number;
@@ -80,6 +81,7 @@ export class TaskService {
 
     if (!uid) {
       this.tasks.set([]);
+      this.saveToStorage(null, []); 
       return;
     }
 
@@ -110,30 +112,29 @@ export class TaskService {
     }
   }
 
-  private storageKey(uid: string) {
-    return `tasks_${uid}`;
-  }
 
   private readFromStorage(uid: string): Task[] {
     if (!this.isBrowser) return [];
 
     try {
-      const raw = localStorage.getItem(this.storageKey(uid));
-      const tasks = raw ? (JSON.parse(raw) as Task[]) : [];
+      const cache = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+      if (cache?.uid !== uid) return [];
 
-      return tasks
-        .filter(task => task.userId === uid)
-        .map(task => ({ ...task, createdAt: new Date(task.createdAt) }));
+      return (cache.tasks as Task[]).map(task => ({ ...task, createdAt: new Date(task.createdAt) }));
     } catch {
       return [];
     }
   }
 
-  private saveToStorage(uid: string, tasks: Task[]) {
+  private saveToStorage(uid: string | null, tasks: Task[]) {
     if (!this.isBrowser) return;
 
     try {
-      localStorage.setItem(this.storageKey(uid), JSON.stringify(tasks));
+      if (uid) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ uid, tasks }));
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
     } catch {
       // Storage full or blocked — Firestore is still the source of truth
     }

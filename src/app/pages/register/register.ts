@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import {
   FormArray,
@@ -108,9 +109,11 @@ export class Register {
   }
 
   constructor() {
-    this.registerForm.controls.password.valueChanges.subscribe(() => {
-      this.registerForm.controls.confirmPassword.updateValueAndValidity();
-    });
+    this.registerForm.controls.password.valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        this.registerForm.controls.confirmPassword.updateValueAndValidity();
+      });
   }
 
   async onSubmit() {
