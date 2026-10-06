@@ -2,7 +2,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { TaskService } from '../../services/task-service';
+import { TaskService } from '../../services/task-service/task-service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';

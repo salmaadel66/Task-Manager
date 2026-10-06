@@ -1,0 +1,318 @@
+
+<div class="container py-5 l-page">
+
+  <div class="row justify-content-center p-register">
+
+    <div class="col-12 col-md-9 col-lg-6">
+
+      <div class="c-card is-auto-height">
+
+        <div class="c-card__body">
+
+          <h2 class="c-card__title">
+            Create Account
+          </h2>
+
+          @if (errorMessage()) {
+            <div class="c-alert is-error" role="alert">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          <form
+            [formGroup]="registerForm"
+            (ngSubmit)="onSubmit()"
+            novalidate
+          >
+
+            <mat-form-field
+              appearance="outline"
+              class="c-form__field"
+            >
+              <mat-label>Full Name</mat-label>
+
+              <input
+                matInput
+                type="text"
+                autocomplete="name"
+                formControlName="fullName"
+                placeholder="Enter your full name"
+              >
+
+              @if (registerForm.controls.fullName.touched && registerForm.controls.fullName.invalid) {
+                <mat-error>
+                  @if (registerForm.controls.fullName.hasError('required')) {
+                    Full name is required
+                  } @else if (registerForm.controls.fullName.hasError('minlength')) {
+                    Full name must be at least 3 characters
+                  } @else {
+                    Full name cannot exceed 100 characters
+                  }
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <mat-form-field
+              appearance="outline"
+              class="c-form__field"
+            >
+              <mat-label>Email</mat-label>
+
+              <input
+                matInput
+                type="email"
+                autocomplete="email"
+                formControlName="email"
+                placeholder="Enter your email"
+              >
+
+              @if (registerForm.controls.email.touched && registerForm.controls.email.invalid) {
+                <mat-error>
+                  @if (registerForm.controls.email.hasError('required')) {
+                    Email is required
+                  } @else if (registerForm.controls.email.hasError('emailTaken')) {
+                    This email is already registered
+                  } @else {
+                    Enter a valid email address
+                  }
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <mat-form-field
+              appearance="outline"
+              class="c-form__field"
+            >
+              <mat-label>Phone Number</mat-label>
+
+              <input
+                matInput
+                type="tel"
+                inputmode="numeric"
+                autocomplete="tel"
+                formControlName="phone"
+                placeholder="e.g. 01012345678"
+              >
+
+              @if (registerForm.controls.phone.touched && registerForm.controls.phone.invalid) {
+                <mat-error>
+                  @if (registerForm.controls.phone.hasError('required')) {
+                    Phone number is required
+                  } @else if (registerForm.controls.phone.hasError('phoneChars')) {
+                    Phone number must contain digits only
+                  } @else {
+                    Phone number must be 10 to 15 digits
+                  }
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <mat-form-field
+              appearance="outline"
+              class="c-form__field"
+            >
+              <mat-label>Password</mat-label>
+
+              <input
+                matInput
+                autocomplete="new-password"
+                formControlName="password"
+                placeholder="Create a password"
+                [type]="hidePassword() ? 'password' : 'text'"
+              >
+
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+                [attr.aria-pressed]="!hidePassword()"
+                (click)="hidePassword.set(!hidePassword())"
+              >
+                <mat-icon>
+                  {{ hidePassword() ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+              </button>
+
+              @if (registerForm.controls.password.touched && registerForm.controls.password.invalid) {
+                <mat-error>
+                  @if (registerForm.controls.password.hasError('required')) {
+                    Password is required
+                  } @else if (registerForm.controls.password.hasError('minlength')) {
+                    Password must be at least 8 characters
+                  } @else if (registerForm.controls.password.hasError('maxlength')) {
+                    Password cannot exceed 128 characters
+                  } @else if (registerForm.controls.password.hasError('edgeSpaces')) {
+                    Password cannot start or end with spaces
+                  } @else if (registerForm.controls.password.hasError('uppercase')) {
+                    Include at least one uppercase letter
+                  } @else if (registerForm.controls.password.hasError('lowercase')) {
+                    Include at least one lowercase letter
+                  } @else if (registerForm.controls.password.hasError('number')) {
+                    Include at least one number
+                  } @else {
+                    Include at least one special character
+                  }
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <mat-form-field
+              appearance="outline"
+              class="c-form__field"
+            >
+              <mat-label>Confirm Password</mat-label>
+
+              <input
+                matInput
+                autocomplete="new-password"
+                formControlName="confirmPassword"
+                placeholder="Re-enter your password"
+                [type]="hideConfirmPassword() ? 'password' : 'text'"
+              >
+
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                [attr.aria-label]="hideConfirmPassword() ? 'Show confirm password' : 'Hide confirm password'"
+                [attr.aria-pressed]="!hideConfirmPassword()"
+                (click)="hideConfirmPassword.set(!hideConfirmPassword())"
+              >
+                <mat-icon>
+                  {{ hideConfirmPassword() ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+              </button>
+
+              @if (registerForm.controls.confirmPassword.touched && registerForm.controls.confirmPassword.invalid) {
+                <mat-error>
+                  @if (registerForm.controls.confirmPassword.hasError('required')) {
+                    Please confirm your password
+                  } @else {
+                    Passwords do not match
+                  }
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <div class="m-hobbies">
+
+              <div class="m-hobbies__header">
+
+                <h3 class="c-section-title mb-0">
+                  Hobbies
+                </h3>
+
+                <button
+                  mat-stroked-button
+                  type="button"
+                  (click)="addHobby()"
+                >
+                  <mat-icon>add</mat-icon>
+                  Add Hobby
+                </button>
+
+              </div>
+
+              @for (hobby of hobbies.controls; track hobby; let i = $index) {
+
+                <div class="m-hobbies__row">
+
+                  <mat-form-field
+                    appearance="outline"
+                    class="c-form__field"
+                  >
+                    <mat-label>Hobby {{ i + 1 }}</mat-label>
+
+                    <input
+                      matInput
+                      type="text"
+                      [formControl]="hobby"
+                      placeholder="e.g. Reading"
+                    >
+
+                    @if (hobby.touched && hobby.invalid) {
+                      <mat-error>
+                        @if (hobby.hasError('required')) {
+                          Hobby is required
+                        } @else if (hobby.hasError('minlength')) {
+                          Hobby must be at least 2 characters
+                        } @else {
+                          Hobby cannot exceed 50 characters
+                        }
+                      </mat-error>
+                    }
+
+                  </mat-form-field>
+
+                  <button
+                    mat-icon-button
+                    type="button"
+                    class="m-hobbies__remove"
+                    [attr.aria-label]="'Remove hobby ' + (i + 1)"
+                    (click)="removeHobby(i)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+
+                </div>
+
+              }
+
+            </div>
+
+
+            <div class="c-form__group">
+
+              <mat-checkbox
+                class="c-form__checkbox"
+                formControlName="terms"
+              >
+                I agree to the Terms &amp; Conditions and Privacy Policy.
+              </mat-checkbox>
+
+              @if (registerForm.controls.terms.touched && registerForm.controls.terms.invalid) {
+                <div class="c-alert is-error mt-2" role="alert">
+                  You must accept the Terms &amp; Conditions and Privacy Policy
+                </div>
+              }
+
+            </div>
+
+
+            <button
+              mat-raised-button
+              type="submit"
+              class="c-button is-primary is-block"
+              [disabled]="registerForm.invalid || loading()"
+              [attr.aria-busy]="loading()"
+            >
+              {{ loading() ? 'Creating account...' : 'Register' }}
+            </button>
+
+          </form>
+
+          <p class="m-auth__footer">
+            Already have an account?
+            <a class="c-link" routerLink="/login">Login</a>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

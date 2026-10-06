@@ -1,0 +1,17 @@
+.m-auth {
+  &__options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-block-end: 1rem;
+  }
+
+  &__footer {
+    margin: 1.5rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    text-align: center;
+  }
+}

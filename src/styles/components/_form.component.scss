@@ -1,0 +1,26 @@
+.c-form {
+  &__field {
+    --mat-form-field-outlined-container-shape: var(--radius-sm);
+    --mat-form-field-outlined-outline-color: var(--color-border);
+    --mat-form-field-outlined-hover-outline-color: var(--color-primary-border);
+    --mat-form-field-outlined-focus-outline-color: var(--color-primary);
+    --mat-form-field-outlined-error-outline-color: var(--color-error);
+    --mat-form-field-outlined-caret-color: var(--color-primary);
+    --mat-form-field-outlined-focus-label-text-color: var(--color-primary);
+    inline-size: 100%;
+    margin-block-end: 0.5rem;
+  }
+
+  &__group {
+    margin-block-end: 1.5rem;
+  }
+
+  &__checkbox {
+    --mat-checkbox-label-text-color: var(--color-text);
+    --mat-checkbox-selected-icon-color: var(--color-primary);
+    --mat-checkbox-selected-checkmark-color: var(--color-on-primary);
+    --mat-checkbox-selected-focus-icon-color: var(--color-primary);
+    --mat-checkbox-selected-hover-icon-color: var(--color-primary-dark);
+    --mat-checkbox-selected-pressed-icon-color: var(--color-primary-dark);
+  }
+}

@@ -1,0 +1,149 @@
+
+<div class="container py-5 l-page">
+
+  <div class="row justify-content-center p-login">
+
+    <div class="col-12 col-md-8 col-lg-5">
+
+      <div class="c-card is-auto-height">
+
+        <div class="c-card__body">
+
+          <h2 class="c-card__title">
+            Login
+          </h2>
+
+          @if (errorMessage()) {
+            <div class="c-alert is-error" role="alert">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          @if (successMessage()) {
+            <div class="c-alert is-success" role="status">
+              {{ successMessage() }}
+            </div>
+          }
+
+          <form
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+            novalidate
+          >
+
+            <mat-form-field
+              appearance="outline"
+              class="c-form__field"
+            >
+              <mat-label>Email</mat-label>
+
+              <input
+                matInput
+                type="email"
+                autocomplete="email"
+                formControlName="email"
+                placeholder="Enter your email"
+              >
+
+              @if (loginForm.controls.email.touched && loginForm.controls.email.invalid) {
+                <mat-error>
+                  @if (loginForm.controls.email.hasError('required')) {
+                    Email is required
+                  } @else {
+                    Enter a valid email address
+                  }
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <mat-form-field
+              appearance="outline"
+              class="c-form__field"
+            >
+              <mat-label>Password</mat-label>
+
+              <input
+                matInput
+                autocomplete="current-password"
+                formControlName="password"
+                placeholder="Enter your password"
+                [type]="hidePassword() ? 'password' : 'text'"
+              >
+
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+                [attr.aria-pressed]="!hidePassword()"
+                (click)="hidePassword.set(!hidePassword())"
+              >
+                <mat-icon>
+                  {{ hidePassword() ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+              </button>
+
+              @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+                <mat-error>
+                  @if (loginForm.controls.password.hasError('required')) {
+                    Password is required
+                  } @else if (loginForm.controls.password.hasError('minlength')) {
+                    Password must be at least 8 characters
+                  } @else {
+                    Password cannot start or end with spaces
+                  }
+                </mat-error>
+              }
+
+            </mat-form-field>
+
+
+            <div class="m-auth__options">
+
+              <mat-checkbox
+                class="c-form__checkbox"
+                formControlName="rememberMe"
+              >
+                Remember me
+              </mat-checkbox>
+
+              <button
+                type="button"
+                class="c-link"
+                (mousedown)="$event.preventDefault()"
+                (click)="onForgotPassword()"
+              >
+                Forgot Password?
+              </button>
+
+            </div>
+
+
+            <button
+              mat-raised-button
+              type="submit"
+              class="c-button is-primary is-block"
+              [disabled]="loginForm.invalid || loading()"
+              [attr.aria-busy]="loading()"
+            >
+              {{ loading() ? 'Logging in...' : 'Login' }}
+            </button>
+
+          </form>
+
+          <p class="m-auth__footer">
+            Don't have an account?
+            <a class="c-link" routerLink="/register">Create Account</a>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

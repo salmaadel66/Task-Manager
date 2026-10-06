@@ -1,7 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import { TaskService } from '../../services/task-service';
+import { TaskService } from '../../services/task-service/task-service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -11,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   imports: [
+    DatePipe,
     RouterLink,
     MatCardModule,
     MatChipsModule,
@@ -32,4 +34,14 @@ export class TaskDetails {
   task = this.taskService.tasks().find(
     task => task.id === this.taskId
   );
+
+  get createdAt(): Date | null {
+    const value: unknown = this.task?.createdAt;
+    if (!value) return null;
+    if (value instanceof Date) return value;
+    if (typeof (value as { toDate?: unknown }).toDate === 'function') {
+      return (value as { toDate: () => Date }).toDate();
+    }
+    return new Date(value as string | number);
+  }
 }

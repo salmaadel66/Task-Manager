@@ -1,5 +1,4 @@
-
-<div class="container py-5 main-container page-background">
+<div class="container py-5 l-page">
 
   @if (task) {
 
@@ -7,45 +6,41 @@
 
       <div class="col-12 col-md-9 col-lg-7">
 
-        <mat-card class="details-card">
+        <mat-card class="c-card is-auto-height">
 
-          <mat-card-header class="details-header">
+          <mat-card-header class="c-card__header">
 
-            <div class="details-header-content">
+            <div class="w-100">
 
-              <div class="d-flex justify-content-between align-items-center gap-3">
+              <div class="p-task-details__top">
 
-                <mat-card-title class="details-header-title">
+                <mat-card-title class="c-card__heading">
                   Task Details
                 </mat-card-title>
 
                 @if (task.completed) {
 
-                  <mat-chip class="completed-chip">
-                    <mat-icon class="completed-icon">
+                  <mat-chip class="c-chip is-success">
+                    <mat-icon>
                       check_circle
                     </mat-icon>
-                    <span class="chip-text">
-                      Completed
-                    </span>
+                    Completed
                   </mat-chip>
 
                 } @else {
 
-                  <mat-chip class="pending-chip">
-                    <mat-icon class="pending-icon">
+                  <mat-chip class="c-chip is-warning">
+                    <mat-icon>
                       schedule
                     </mat-icon>
-                    <span class="chip-text">
-                      Pending
-                    </span>
+                    Pending
                   </mat-chip>
 
                 }
 
               </div>
 
-              <mat-card-subtitle class="details-header-subtitle">
+              <mat-card-subtitle class="c-card__subtitle">
                 Task information
               </mat-card-subtitle>
 
@@ -53,25 +48,25 @@
 
           </mat-card-header>
 
-          <mat-divider class="task-divider"></mat-divider>
+          <mat-divider class="c-card__divider"></mat-divider>
 
-          <mat-card-content class="details-content">
+          <mat-card-content class="c-card__body">
 
-            <div class="details-title-section">
+            <div class="p-task-details__title-section">
 
-              <div class="task-icon">
-                <mat-icon>
+              <div class="c-icon-badge">
+                <mat-icon class="c-icon-badge__icon">
                   task_alt
                 </mat-icon>
               </div>
 
-              <div class="details-title-wrapper">
+              <div>
 
-                <h2 class="details-title">
+                <h2 class="p-task-details__title">
                   {{ task.title }}
                 </h2>
 
-                <span class="details-task-id">
+                <span class="p-task-details__id">
                   Task #{{ task.id }}
                 </span>
 
@@ -79,65 +74,53 @@
 
             </div>
 
-            <div class="details-description-section">
+            <h6 class="c-section-title">
+              Description
+            </h6>
 
-              <h6 class="section-title">
-                Description
-              </h6>
+            <p class="p-task-details__description">
+              {{ task.desc }}
+            </p>
 
-              <p class="details-description">
-                {{ task.desc }}
-              </p>
+            <mat-divider class="c-card__divider"></mat-divider>
 
-            </div>
+            <div class="p-task-details__info">
 
-            <mat-divider class="task-divider"></mat-divider>
+              <div class="c-info-box">
 
-            <div class="row g-3 mt-3">
+                <mat-icon class="c-info-box__icon">
+                  tag
+                </mat-icon>
 
-              <div class="col-12 col-sm-6">
+                <div class="c-info-box__content">
 
-                <div class="info-box">
+                  <small class="c-info-box__label">
+                    Task ID
+                  </small>
 
-                  <mat-icon class="info-icon">
-                    tag
-                  </mat-icon>
-
-                  <div class="info-content">
-
-                    <small class="info-label">
-                      Task ID
-                    </small>
-
-                    <strong class="info-value">
-                      {{ task.id }}
-                    </strong>
-
-                  </div>
+                  <strong class="c-info-box__value">
+                    {{ task.id }}
+                  </strong>
 
                 </div>
 
               </div>
 
-              <div class="col-12 col-sm-6">
+              <div class="c-info-box">
 
-                <div class="info-box">
+                <mat-icon class="c-info-box__icon">
+                  calendar_today
+                </mat-icon>
 
-                  <mat-icon class="info-icon">
-                    calendar_today
-                  </mat-icon>
+                <div class="c-info-box__content">
 
-                  <div class="info-content">
+                  <small class="c-info-box__label">
+                    Created At
+                  </small>
 
-                    <small class="info-label">
-                      Created At
-                    </small>
-
-                    <strong class="info-value">
-                      {{ task.createdAt }}
-                    </strong>
-
-                  </div>
+                  <strong class="c-info-box__value">
+                    {{ createdAt | date: 'medium' }}
+                  </strong>
 
                 </div>
 
@@ -147,15 +130,14 @@
 
           </mat-card-content>
 
-          <mat-card-actions class="details-actions">
+          <mat-card-actions class="c-card__actions">
 
             <a
               mat-raised-button
-              color="primary"
-              routerLink="/"
-              class="primary-button"
+              routerLink="/tasks"
+              class="c-button is-primary"
             >
-              <mat-icon class="button-icon">
+              <mat-icon class="c-button__icon">
                 arrow_back
               </mat-icon>
 
@@ -176,29 +158,28 @@
 
       <div class="col-12 col-md-8 col-lg-6">
 
-        <mat-card class="error-card">
+        <mat-card class="c-card is-center is-auto-height">
 
-          <mat-card-content class="error-card-content">
+          <mat-card-content class="c-card__body">
 
-            <mat-icon class="error-icon">
+            <mat-icon class="p-task-details__error-icon">
               error_outline
             </mat-icon>
 
-            <h2 class="error-title">
+            <h2 class="p-task-details__error-title">
               Task not found
             </h2>
 
-            <p class="error-description">
+            <p class="p-task-details__error-text">
               The task you're looking for doesn't exist.
             </p>
 
             <a
               mat-raised-button
-              color="primary"
-              routerLink="/"
-              class="primary-button"
+              routerLink="/tasks"
+              class="c-button is-primary"
             >
-              <mat-icon class="button-icon">
+              <mat-icon class="c-button__icon">
                 arrow_back
               </mat-icon>
 
@@ -216,5 +197,3 @@
   }
 
 </div>
-
-

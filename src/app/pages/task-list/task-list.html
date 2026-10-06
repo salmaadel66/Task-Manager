@@ -1,15 +1,14 @@
+<div class="container py-5 l-page">
 
-<div class="container py-5 main-container page-background">
+  <div class="c-page-header p-task-list__header">
 
-  <div class="page-header d-flex justify-content-between align-items-center gap-3 flex-wrap">
+    <div>
 
-    <div class="page-header-content">
-
-      <h2 class="page-header-title">
+      <h2 class="c-page-header__title">
         Task List
       </h2>
 
-      <p class="page-header-description">
+      <p class="c-page-header__description">
         Manage your tasks easily
       </p>
 
@@ -17,11 +16,10 @@
 
     <a
       mat-raised-button
-      color="primary"
       routerLink="/add-task"
-      class="primary-button add-task-button"
+      class="c-button is-light"
     >
-      <mat-icon class="button-icon">
+      <mat-icon class="c-button__icon">
         add
       </mat-icon>
 
@@ -31,100 +29,90 @@
   </div>
 
 
-  <div class="row g-4">
+  <div class="p-task-list__grid">
 
-    @for (task of taskService.tasks(); track task.id) {
+    @for (task of taskService.tasks(); track task.id; let i = $index) {
 
-      <div class="col-12 col-md-6 col-lg-4">
+      <mat-card
+        class="c-card c-task-card is-interactive"
+        [style.animation-delay.ms]="i * 70"
+        [routerLink]="['/task', task.id]"
+      >
 
-        <mat-card
-          class="task-card"
-          [routerLink]="['/task', task.id]"
-        >
+        <mat-card-content class="c-task-card__content">
 
-          <mat-card-content class="task-card-content">
+          <div class="c-task-card__header">
 
-            <div class="task-card-header d-flex justify-content-between align-items-start gap-3 mb-3">
+            <div class="c-task-card__heading">
 
-              <div class="d-flex align-items-center gap-3 task-card-title-wrapper">
-
-                <div class="task-icon">
-
-                  <mat-icon>
-                    task_alt
-                  </mat-icon>
-
-                </div>
-
-                <div class="task-card-title-wrapper">
-
-                  <h5 class="task-card-title">
-                    {{ task.title }}
-                  </h5>
-
-                </div>
-
+              <div class="c-icon-badge">
+                <mat-icon class="c-icon-badge__icon">
+                  task_alt
+                </mat-icon>
               </div>
 
-
-              @if (task.completed) {
-
-                <mat-chip class="completed-chip ">
-
-                  <mat-icon class="completed-icon">
-                    check_circle
-                  </mat-icon>
-
-                  Completed
-
-                </mat-chip>
-
-              } @else {
-
-                <mat-chip class="pending-chip">
-
-                  <mat-icon class="pending-icon">
-                    schedule
-                  </mat-icon>
-
-                  Pending
-
-                </mat-chip>
-
-              }
+              <h5 class="c-task-card__title">
+                {{ task.title }}
+              </h5>
 
             </div>
 
 
-            <mat-divider class="task-divider"></mat-divider>
+            @if (task.completed) {
+
+              <mat-chip class="c-chip is-success">
+
+                <mat-icon>
+                  check_circle
+                </mat-icon>
+
+                Completed
+
+              </mat-chip>
+
+            } @else {
+
+              <mat-chip class="c-chip is-warning">
+
+                <mat-icon>
+                  schedule
+                </mat-icon>
+
+                Pending
+
+              </mat-chip>
+
+            }
+
+          </div>
 
 
-            <p class="task-description">
-              {{ task.desc }}
-            </p>
+          <mat-divider class="c-card__divider"></mat-divider>
 
 
-            <div class="task-card-footer">
+          <p class="c-task-card__description">
+            {{ task.desc }}
+          </p>
 
-              <span class="view-task-text">
-                View task
-              </span>
 
-              <mat-icon class="view-task-icon">
-                arrow_forward
-              </mat-icon>
+          <div class="c-task-card__footer">
 
-            </div>
+            <span>
+              View task
+            </span>
 
-          </mat-card-content>
+            <mat-icon class="c-task-card__arrow">
+              arrow_forward
+            </mat-icon>
 
-        </mat-card>
+          </div>
 
-      </div>
+        </mat-card-content>
+
+      </mat-card>
 
     }
 
   </div>
 
 </div>
-

@@ -1,0 +1,57 @@
+.c-button {
+  --mat-button-protected-container-shape: var(--radius-sm);
+  --mat-button-protected-label-text-weight: 600;
+  --mat-button-protected-container-height: 2.75rem;
+  --mat-button-outlined-container-shape: var(--radius-sm);
+  --mat-button-outlined-label-text-weight: 600;
+  --mat-button-outlined-container-height: 2.75rem;
+  letter-spacing: 0.01em;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+
+  &:hover {
+    transform: translateY(-0.125rem);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.is-primary {
+    --mat-button-protected-container-color: transparent;
+    --mat-button-protected-label-text-color: var(--color-on-primary);
+    --mat-button-protected-state-layer-color: var(--color-on-primary);
+    --mat-button-protected-ripple-color: var(--color-on-primary-hover);
+    background-image: var(--gradient-primary);
+    box-shadow: var(--shadow-button);
+
+    &:disabled {
+      --mat-button-protected-container-color: var(--color-border);
+      background-image: none;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+
+  &.is-light {
+    --mat-button-protected-container-color: var(--color-surface);
+    --mat-button-protected-label-text-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+  }
+
+  &.is-outline-light {
+    --mat-button-outlined-outline-color: var(--color-on-primary-border);
+    --mat-button-outlined-label-text-color: var(--color-on-primary);
+    --mat-button-outlined-state-layer-color: var(--color-on-primary);
+    --mat-button-outlined-ripple-color: var(--color-on-primary-hover);
+  }
+
+  &.is-block {
+    inline-size: 100%;
+  }
+
+  &__icon {
+    margin-inline-end: 0.375rem;
+  }
+}

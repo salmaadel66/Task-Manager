@@ -1,0 +1,92 @@
+<div class="container py-5 l-page">
+
+  <div class="c-page-header is-hero">
+
+    <h1 class="c-page-header__title">
+      Welcome to Task Manager
+    </h1>
+
+    <p class="c-page-header__description">
+      Task Manager is a simple app to organize your daily work. Create tasks,
+      follow their status and keep everything in one place, backed by Firebase.
+    </p>
+
+    <div class="c-page-header__actions d-flex flex-wrap gap-2">
+
+      @if (authService.user()) {
+
+        <a
+          mat-raised-button
+          routerLink="/tasks"
+          class="c-button is-light"
+        >
+          View Tasks
+        </a>
+
+        <a
+          mat-stroked-button
+          routerLink="/add-task"
+          class="c-button is-outline-light"
+        >
+          Add Task
+        </a>
+
+      } @else {
+
+        <a
+          mat-raised-button
+          routerLink="/login"
+          class="c-button is-light"
+        >
+          Login
+        </a>
+
+        <a
+          mat-stroked-button
+          routerLink="/register"
+          class="c-button is-outline-light"
+        >
+          Create Account
+        </a>
+
+      }
+
+    </div>
+
+  </div>
+
+
+  <div class="p-home__features">
+
+    @for (feature of features; track feature.title; let i = $index) {
+
+      <mat-card
+        class="c-card"
+        [style.animation-delay.ms]="i * 90"
+      >
+
+        <mat-card-content class="c-card__body">
+
+          <div class="c-icon-badge">
+            <mat-icon class="c-icon-badge__icon">
+              {{ feature.icon }}
+            </mat-icon>
+          </div>
+
+          <h3 class="p-home__feature-title">
+            {{ feature.title }}
+          </h3>
+
+          <p class="p-home__feature-text">
+            {{ feature.description }}
+          </p>
+
+        </mat-card-content>
+
+      </mat-card>
+
+    }
+
+  </div>
+
+</div>

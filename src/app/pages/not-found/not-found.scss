@@ -1,131 +1,79 @@
+@use "../../../styles/tools" as *;
 
-.not-found-row {
-  min-height: calc(100vh - 10rem);
-}
-
-.not-found-card {
-  border: 0 !important;
-  border-radius: 1.125rem !important;
-  background-color: var(--color-white);
-  box-shadow: 0 0.625rem 2rem rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-}
-
-.not-found-content {
-  padding: 3.5rem 2rem;
-  text-align: center;
-}
-
-.not-found-animation {
-  display: flex;
+.p-not-found {
   align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
+  min-block-size: 60vh;
 
-.not-found-number {
-  color: var(--color-primary);
-  font-size: 5rem;
-  font-weight: 800;
-  line-height: 1;
-  animation: number-float 2s ease-in-out infinite;
-}
-
-.not-found-number:last-child {
-  animation-delay: 0.25s;
-}
-
-.not-found-icon-wrapper {
-  width: 5.5rem;
-  height: 5.5rem;
-  border-radius: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-secondary)
-  );
-  animation: icon-float 2s ease-in-out infinite;
-}
-
-.not-found-icon {
-  width: 3rem;
-  height: 3rem;
-  font-size: 3rem;
-  color: var(--color-white);
-}
-
-.not-found-title {
-  color: var(--color-text);
-  margin: 0 0 0.75rem;
-  font-size: 1.75rem;
-  font-weight: 700;
-}
-
-.not-found-description {
-  max-width: 30rem;
-  margin: 0 auto 1.75rem;
-  color: var(--color-muted);
-  font-size: 0.9375rem;
-  line-height: 1.7;
-}
-
-.not-found-button {
-  min-height: 2.75rem;
-  padding: 0.625rem 1.25rem !important;
-}
-
-@keyframes number-float {
-  0%,
-  100% {
-    transform: translateY(0);
+  &__content {
+    padding: 3rem 1.5rem;
   }
 
-  50% {
-    transform: translateY(-0.625rem);
-  }
-}
-
-@keyframes icon-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-0.75rem) rotate(3deg);
-  }
-}
-
-@media (max-width: 36rem) {
-  .not-found-content {
-    padding: 2.5rem 1.25rem;
-  }
-
-  .not-found-animation {
+  &__animation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    margin-block-end: 1.5rem;
   }
 
-  .not-found-number {
-    font-size: 3.75rem;
+  &__number {
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+
+    @include mq(min, w, md) {
+      font-size: 5.5rem;
+    }
+
+    @include motion-safe {
+      animation: float 2.4s ease-in-out infinite;
+
+      &:last-child {
+        animation-delay: 0.3s;
+      }
+    }
   }
 
-  .not-found-icon-wrapper {
-    width: 4.5rem;
-    height: 4.5rem;
+  &__icon-wrapper {
+    @include circle(4.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-primary);
+
+    @include mq(min, w, md) {
+      @include circle(5.5rem);
+    }
+
+    @include motion-safe {
+      animation: float 2.4s ease-in-out 0.15s infinite;
+    }
   }
 
-  .not-found-icon {
-    width: 2.5rem;
-    height: 2.5rem;
+  &__icon {
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    color: var(--color-on-primary);
     font-size: 2.5rem;
   }
 
-  .not-found-title {
-    font-size: 1.5rem;
+  &__title {
+    margin: 0 0 0.75rem;
+    color: var(--color-text);
+    font-size: 1.625rem;
+    font-weight: 700;
+  }
+
+  &__description {
+    max-inline-size: 30rem;
+    margin: 0 auto 1.75rem;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.7;
   }
 }
-

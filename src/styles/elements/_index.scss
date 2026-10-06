@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  block-size: 100%;
+  color-scheme: light;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font: var(--mat-sys-body-medium);
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 0.125rem solid var(--color-primary);
+  outline-offset: 0.125rem;
+}
+
+::selection {
+  background-color: var(--color-primary-border);
+  color: var(--color-text);
+}

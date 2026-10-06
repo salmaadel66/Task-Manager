@@ -1,0 +1,68 @@
+@use "../tools" as *;
+
+.c-task-card {
+  &__content {
+    padding: 1.5rem;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-block-end: 1rem;
+  }
+
+  &__heading {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 0.875rem;
+    min-inline-size: 0;
+  }
+
+  &__title {
+    @include cut-text(2);
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  &__description {
+    @include scroll(v);
+    max-block-size: 6.5rem;
+    margin: 1rem 0 1.5rem;
+    padding-inline-end: 0.5rem;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  &__arrow {
+    inline-size: 1.125rem;
+    block-size: 1.125rem;
+    font-size: 1.125rem;
+    transition: transform var(--transition-base);
+  }
+
+  &:hover &__arrow {
+    transform: translateX(0.25rem);
+  }
+
+  &:hover .c-icon-badge {
+    transform: scale(1.06) rotate(-3deg);
+  }
+}

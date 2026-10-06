@@ -1,0 +1,39 @@
+@use "sass:map";
+@use "sass:list";
+@use "../settings" as settings;
+
+@mixin mq($type: min, $dimension: w, $breakpoint-name: md) {
+  @if not list.index((min, max), $type) {
+    @error "mq(): $type must be min or max, got #{$type}";
+  }
+
+  @if not list.index((w, h), $dimension) {
+    @error "mq(): $dimension must be w or h, got #{$dimension}";
+  }
+
+  @if not map.has-key(settings.$breakpoints, $breakpoint-name) {
+    @error "mq(): unknown breakpoint #{$breakpoint-name}";
+  }
+
+  $property: height;
+
+  @if $dimension == w {
+    $property: width;
+  }
+
+  $value: map.get(settings.$breakpoints, $breakpoint-name);
+
+  @if $type == max {
+    $value: $value - 0.0625rem;
+  }
+
+  @media (#{$type}-#{$property}: $value) {
+    @content;
+  }
+}
+
+@mixin motion-safe {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}

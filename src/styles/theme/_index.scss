@@ -1,0 +1,33 @@
+@use "sass:map";
+@use "../settings" as settings;
+
+:root {
+  @each $name, $value in settings.$colors {
+    --color-#{$name}: #{$value};
+  }
+
+  @each $name, $value in settings.$radii {
+    --radius-#{$name}: #{$value};
+  }
+
+  @each $name, $value in settings.$shadows {
+    --shadow-#{$name}: #{$value};
+  }
+
+  @each $name, $value in settings.$gradients {
+    --gradient-#{$name}: #{$value};
+  }
+
+  --transition-base: #{map.get(settings.$transitions, "base")};
+
+  --mat-sys-primary: var(--color-primary);
+  --mat-sys-on-primary: var(--color-on-primary);
+  --mat-sys-primary-container: var(--color-primary-soft);
+  --mat-sys-on-primary-container: var(--color-primary-dark);
+  --mat-sys-surface: var(--color-background);
+  --mat-sys-on-surface: var(--color-text);
+  --mat-sys-on-surface-variant: var(--color-muted);
+  --mat-sys-outline: var(--color-border);
+  --mat-sys-outline-variant: var(--color-border);
+  --mat-sys-error: var(--color-error);
+}

@@ -1,0 +1,41 @@
+@mixin grid($min-col-size: 4rem, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, $min-col-size), 1fr));
+  gap: $gap;
+}
+
+@mixin scroll($direction: "both") {
+  @if $direction == "v" {
+    overflow-y: auto;
+    overflow-x: hidden;
+  } @else if $direction == "h" {
+    overflow-x: auto;
+    overflow-y: hidden;
+  } @else if $direction == "both" {
+    overflow: auto;
+  } @else {
+    @error "scroll(): $direction must be v, h or both, got #{$direction}";
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+}
+
+@mixin circle($one-side: 0) {
+  inline-size: $one-side;
+  block-size: $one-side;
+  border-radius: 50%;
+}
+
+@mixin cut-text($lines: 1) {
+  @if $lines < 1 {
+    @error "cut-text(): $lines must be at least 1";
+  }
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}

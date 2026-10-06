@@ -1,0 +1,35 @@
+.c-chip {
+  --mat-chip-label-text-weight: 600;
+  --mat-chip-label-text-size: 0.8125rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  .mdc-evolution-chip__text-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    white-space: nowrap;
+  }
+
+  .mat-icon {
+    flex-shrink: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    margin: 0;
+    overflow: visible;
+  }
+
+  &.is-success {
+    --mat-chip-elevated-container-color: var(--color-success-bg);
+    --mat-chip-label-text-color: var(--color-success);
+    --mat-chip-with-icon-icon-color: var(--color-success);
+  }
+
+  &.is-warning {
+    --mat-chip-elevated-container-color: var(--color-warning-bg);
+    --mat-chip-label-text-color: var(--color-warning);
+    --mat-chip-with-icon-icon-color: var(--color-warning-icon);
+  }
+}

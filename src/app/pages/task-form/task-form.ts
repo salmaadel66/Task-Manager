@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
-import { TaskService } from '../../services/task-service';
+import { TaskService } from '../../services/task-service/task-service';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -51,6 +51,6 @@ export class TaskForm {
       createdAt: new Date()
     });
 
-    this.router.navigate(['/']);
+    this.router.navigate(['/tasks']);
   }
 }

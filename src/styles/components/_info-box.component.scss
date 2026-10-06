@@ -1,0 +1,48 @@
+@use "../tools" as *;
+
+.c-info-box {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-soft);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-base);
+
+  &:hover {
+    transform: translateY(-0.125rem);
+    border-color: var(--color-primary-border);
+    background-color: var(--color-surface);
+  }
+
+  &__icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    overflow: visible;
+  }
+
+  &__content {
+    min-inline-size: 0;
+  }
+
+  &__label {
+    display: block;
+    margin-block-end: 0.125rem;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+  }
+
+  &__value {
+    @include cut-text(2);
+    color: var(--color-text);
+    font-size: 0.9375rem;
+  }
+}

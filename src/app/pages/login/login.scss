@@ -1,0 +1,8 @@
+@use "../../../styles/tools" as *;
+
+.p-login {
+  @include mq(min, w, md) {
+    align-items: center;
+    min-block-size: 60vh;
+  }
+}

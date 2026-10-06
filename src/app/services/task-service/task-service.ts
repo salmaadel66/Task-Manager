@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 
 export interface Task {
   id: number;
