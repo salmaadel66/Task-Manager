@@ -14,24 +14,85 @@
 
     </div>
 
-    <a
-      mat-raised-button
-      routerLink="/add-task"
-      class="c-button is-light"
-    >
-      <mat-icon class="c-button__icon">
-        add
-      </mat-icon>
-
-      Add Task
-    </a>
-
   </div>
 
 
-  <div class="p-task-list__grid">
+  @if (!taskService.loaded()) {
+
+    <div class="p-task-list__loading" role="status">
+      <mat-spinner diameter="44"></mat-spinner>
+      <span>Loading your tasks…</span>
+    </div>
+
+  } @else if (taskService.tasks().length === 0) {
+
+    <mat-card class="c-card is-auto-height c-empty-state">
+
+      <mat-card-content class="c-empty-state__body d-flex flex-column align-items-center">
+
+        <div class="c-empty-state__illustration" aria-hidden="true">
+          <span class="c-empty-state__ring"></span>
+          <span class="c-empty-state__ring is-outer"></span>
+
+          <div class="c-empty-state__icon">
+            <mat-icon>playlist_add</mat-icon>
+          </div>
+
+          <span class="c-empty-state__spark is-one">
+            <mat-icon>auto_awesome</mat-icon>
+          </span>
+          <span class="c-empty-state__spark is-two">
+            <mat-icon>check_circle</mat-icon>
+          </span>
+        </div>
+
+        <h3 class="c-empty-state__title">
+          No tasks yet
+        </h3>
+
+        <p class="c-empty-state__text">
+          Your list is empty. Add your first task to start organizing your day
+          and keep track of what's done.
+        </p>
+
+        <a
+          mat-raised-button
+          routerLink="/add-task"
+          class="c-button is-primary"
+        >
+          <mat-icon class="c-button__icon">
+            add
+          </mat-icon>
+
+          Create your first task
+        </a>
+
+        <ul class="c-empty-state__tips">
+          <li>
+            <mat-icon>edit_note</mat-icon>
+            Give it a clear title
+          </li>
+          <li>
+            <mat-icon>description</mat-icon>
+            Add a short description
+          </li>
+          <li>
+            <mat-icon>task_alt</mat-icon>
+            Mark it done when finished
+          </li>
+        </ul>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  } @else {
+
+  <div class="row g-4">
 
     @for (task of taskService.tasks(); track task.id; let i = $index) {
+
+      <div class="col-12 col-md-6 col-lg-4">
 
       <mat-card
         class="c-card c-task-card is-interactive"
@@ -90,7 +151,12 @@
           <mat-divider class="c-card__divider"></mat-divider>
 
 
-          <p class="c-task-card__description">
+          <p
+            class="c-task-card__description"
+            [matTooltip]="task.desc"
+            matTooltipPosition="above"
+            matTooltipClass="c-tooltip"
+          >
             {{ task.desc }}
           </p>
 
@@ -111,8 +177,33 @@
 
       </mat-card>
 
+      </div>
+
     }
 
   </div>
 
+  }
+
 </div>
+
+
+@if (taskService.tasks().length > 0) {
+
+  <div class="p-task-list__actions">
+
+    <a
+      mat-raised-button
+      routerLink="/add-task"
+      class="c-button is-primary"
+    >
+      <mat-icon class="c-button__icon">
+        add
+      </mat-icon>
+
+      Add Task
+    </a>
+
+  </div>
+
+}

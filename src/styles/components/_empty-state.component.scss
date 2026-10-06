@@ -1,0 +1,145 @@
+@use "../tools" as *;
+
+.c-empty-state {
+  max-inline-size: 40rem;
+  margin-inline: auto;
+  text-align: center;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem 1.5rem;
+
+    @include mq(min, w, md) {
+      padding: 3.5rem 3rem;
+    }
+  }
+
+  &__illustration {
+    position: relative;
+    display: grid;
+    place-items: center;
+    inline-size: 9rem;
+    block-size: 9rem;
+    margin-block-end: 1.75rem;
+  }
+
+  &__ring {
+    position: absolute;
+    inset: 1rem;
+    border-radius: 50%;
+    background: var(--color-primary-soft);
+
+    &.is-outer {
+      inset: 0;
+      border: 2px dashed var(--color-primary-border);
+      background: none;
+
+      @include motion-safe {
+        animation: spin 24s linear infinite;
+      }
+    }
+  }
+
+  &__icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    inline-size: 4.5rem;
+    block-size: 4.5rem;
+    border-radius: var(--radius-md);
+    background: var(--gradient-primary);
+    color: var(--color-on-primary);
+    box-shadow: var(--shadow-primary);
+
+    mat-icon {
+      inline-size: 2.25rem;
+      block-size: 2.25rem;
+      font-size: 2.25rem;
+    }
+
+    @include motion-safe {
+      animation: float 3.5s ease-in-out infinite;
+    }
+  }
+
+  &__spark {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: 50%;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+
+    mat-icon {
+      inline-size: 1.125rem;
+      block-size: 1.125rem;
+      font-size: 1.125rem;
+    }
+
+    &.is-one {
+      inset-block-start: 0.5rem;
+      inset-inline-end: 0.25rem;
+      color: var(--color-warning-icon);
+    }
+
+    &.is-two {
+      inset-block-end: 0.75rem;
+      inset-inline-start: 0;
+      color: var(--color-success);
+    }
+
+    @include motion-safe {
+      animation: fade 0.6s 0.3s ease-out both;
+    }
+  }
+
+  &__title {
+    margin: 0 0 0.625rem;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  &__text {
+    max-inline-size: 26rem;
+    margin: 0 0 1.75rem;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  &__tips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 2rem 0 0;
+    padding: 1.5rem 0 0;
+    border-block-start: 1px solid var(--color-border);
+    list-style: none;
+    inline-size: 100%;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      border-radius: 999px;
+      background: var(--color-primary-soft);
+      color: var(--color-primary-dark);
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+
+    mat-icon {
+      inline-size: 1rem;
+      block-size: 1rem;
+      font-size: 1rem;
+    }
+  }
+}

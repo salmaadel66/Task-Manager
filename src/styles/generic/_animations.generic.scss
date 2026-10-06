@@ -30,3 +30,9 @@
     transform: translateY(-0.625rem);
   }
 }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

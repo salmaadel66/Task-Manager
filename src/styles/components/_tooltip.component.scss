@@ -1,0 +1,20 @@
+.c-tooltip {
+  --mdc-plain-tooltip-container-color: var(--color-surface);
+  --mdc-plain-tooltip-supporting-text-color: var(--color-text);
+  --mat-tooltip-container-color: var(--color-surface);
+  --mat-tooltip-supporting-text-color: var(--color-text);
+
+  .mdc-tooltip__surface {
+    max-inline-size: 20rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-md, 0 8px 24px rgb(0 0 0 / 0.12));
+    color: var(--color-text);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    text-align: start;
+    overflow-wrap: anywhere;
+  }
+}

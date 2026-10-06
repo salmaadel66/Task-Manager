@@ -9,7 +9,21 @@
     gap: 1rem;
   }
 
-  &__grid {
-    @include grid(18rem, 1.5rem);
+  &__loading {
+    --mat-progress-spinner-active-indicator-color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 4rem;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+  }
+
+  &__actions {
+    position: fixed;
+    z-index: 100;
+    inset-block-end: 4rem;
+    inset-inline-end: 2rem;
   }
 }

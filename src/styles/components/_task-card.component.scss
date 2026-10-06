@@ -2,6 +2,9 @@
 
 .c-task-card {
   &__content {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
     padding: 1.5rem;
   }
 
@@ -31,17 +34,18 @@
   }
 
   &__description {
-    @include scroll(v);
-    max-block-size: 6.5rem;
+    @include cut-text(2);
+    min-block-size: calc(2 * 1.7em);
     margin: 1rem 0 1.5rem;
-    padding-inline-end: 0.5rem;
     color: var(--color-muted);
     font-size: 0.9375rem;
     line-height: 1.7;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
   &__footer {
+    margin-block-start: auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
