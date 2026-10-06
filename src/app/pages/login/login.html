@@ -26,8 +26,8 @@
           }
 
           <form
-            [formGroup]="loginForm"
-            (ngSubmit)="onSubmit()"
+            #loginForm="ngForm"
+            (ngSubmit)="onSubmit(loginForm)"
             novalidate
           >
 
@@ -41,13 +41,17 @@
                 matInput
                 type="email"
                 autocomplete="email"
-                formControlName="email"
+                name="email"
+                #emailCtrl="ngModel"
+                [(ngModel)]="email"
+                required
+                email
                 placeholder="Enter your email"
               >
 
-              @if (loginForm.controls.email.touched && loginForm.controls.email.invalid) {
+              @if (emailCtrl.touched && emailCtrl.invalid) {
                 <mat-error>
-                  @if (loginForm.controls.email.hasError('required')) {
+                  @if (emailCtrl.hasError('required')) {
                     Email is required
                   } @else {
                     Enter a valid email address
@@ -67,7 +71,11 @@
               <input
                 matInput
                 autocomplete="current-password"
-                formControlName="password"
+                name="password"
+                #passwordCtrl="ngModel"
+                [(ngModel)]="password"
+                required
+                minlength="8"
                 placeholder="Enter your password"
                 [type]="hidePassword() ? 'password' : 'text'"
               >
@@ -85,11 +93,11 @@
                 </mat-icon>
               </button>
 
-              @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+              @if (passwordCtrl.touched && passwordCtrl.invalid) {
                 <mat-error>
-                  @if (loginForm.controls.password.hasError('required')) {
+                  @if (passwordCtrl.hasError('required')) {
                     Password is required
-                  } @else if (loginForm.controls.password.hasError('minlength')) {
+                  } @else if (passwordCtrl.hasError('minlength')) {
                     Password must be at least 8 characters
                   } @else {
                     Password cannot start or end with spaces
@@ -104,7 +112,8 @@
 
               <mat-checkbox
                 class="c-form__checkbox"
-                formControlName="rememberMe"
+                name="rememberMe"
+                [(ngModel)]="rememberMe"
               >
                 Remember me
               </mat-checkbox>
@@ -113,7 +122,7 @@
                 type="button"
                 class="c-link"
                 (mousedown)="$event.preventDefault()"
-                (click)="onForgotPassword()"
+                (click)="onForgotPassword(loginForm)"
               >
                 Forgot Password?
               </button>

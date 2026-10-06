@@ -1,15 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
-
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
-import { AuthService, authErrorMessage } from '../../services/auth-service/auth-service';
+import {
+  AuthService,
+  authErrorMessage
+} from '../../services/auth-service/auth-service';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-login',
   imports: [
     RouterLink,
-    ReactiveFormsModule,
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
@@ -41,55 +37,43 @@ export class Login {
   errorMessage = signal('');
   successMessage = signal('');
 
-  loginForm = new FormGroup({
+  email = '';
+  password = '';
+  rememberMe = false;
 
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email
-    ]),
+  async onSubmit(form: NgForm) {
 
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8)
-    ]),
-
-    rememberMe: new FormControl(false)
-
-  });
-
-  async onSubmit() {
-
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+    if (form.invalid) {
+      form.control.markAllAsTouched();
       return;
     }
-
-    const value = this.loginForm.getRawValue();
 
     this.loading.set(true);
     this.errorMessage.set('');
 
     try {
       await this.authService.login(
-        value.email || '',
-        value.password || '',
-        value.rememberMe || false
+        this.email,
+        this.password,
+        this.rememberMe
       );
 
       this.router.navigate(['/']);
-    } catch (e) {
-      this.errorMessage.set(authErrorMessage(e));
+
+    } catch (error) {
+      this.errorMessage.set(authErrorMessage(error));
+
     } finally {
       this.loading.set(false);
     }
   }
 
-  async onForgotPassword() {
+  async onForgotPassword(form: NgForm) {
 
-    const email = this.loginForm.controls.email;
+    const emailControl = form.controls['email'];
 
-    if (email.invalid) {
-      email.markAsTouched();
+    if (emailControl.invalid) {
+      emailControl.markAsTouched();
       return;
     }
 
@@ -97,15 +81,14 @@ export class Login {
     this.successMessage.set('');
 
     try {
-      await this.authService.resetPassword(
-        email.value || ''
-      );
+      await this.authService.resetPassword(this.email);
 
       this.successMessage.set(
         'If an account exists for this email, a password reset link has been sent.'
       );
-    } catch (e) {
-      this.errorMessage.set(authErrorMessage(e));
+
+    } catch (error) {
+      this.errorMessage.set(authErrorMessage(error));
     }
   }
 }

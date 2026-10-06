@@ -1,11 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-export const trimmedEmail: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const value = String(control.value ?? '').trim();
-  return !value || EMAIL_PATTERN.test(value) ? null : { email: true };
-};
 
 export const noEdgeSpaces: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const value = String(control.value ?? '');

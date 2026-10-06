@@ -18,7 +18,6 @@ import {
   phoneNumber,
   requiredTrimmed,
   strongPassword,
-  trimmedEmail,
   trimmedLength
 } from '../../shared/validators';
 
@@ -61,7 +60,7 @@ export class Register {
 
       email: new FormControl('', [
         Validators.required,
-        trimmedEmail
+         Validators.email,
       ]),
 
       phone: new FormControl('', [
