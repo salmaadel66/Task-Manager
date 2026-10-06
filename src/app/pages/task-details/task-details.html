@@ -14,9 +14,23 @@
 
               <div class="p-task-details__top">
 
-                <mat-card-title class="c-card__heading">
-                  Task Details
-                </mat-card-title>
+                <div class="p-task-details__heading">
+
+                  <a
+                    mat-icon-button
+                    routerLink="/tasks"
+                    class="p-task-details__back"
+                    aria-label="Back to tasks"
+                    matTooltip="Back to tasks"
+                  >
+                    <mat-icon>arrow_back</mat-icon>
+                  </a>
+
+                  <mat-card-title class="c-card__heading">
+                    Task Details
+                  </mat-card-title>
+
+                </div>
 
                 @if (task.completed) {
 
@@ -66,9 +80,26 @@
                   {{ task.title }}
                 </h2>
 
-                <span class="p-task-details__id">
-                  Task #{{ task.id }}
-                </span>
+                <div class="p-task-details__meta">
+
+                  <span class="p-task-details__id">
+                    <mat-icon>tag</mat-icon>
+                    Task {{ task.id }}
+                  </span>
+
+                  @if (createdAt) {
+                    <span class="p-task-details__date">
+                      <mat-icon>calendar_today</mat-icon>
+                      <span class="c-info-box__value">
+                        {{ createdAt | date: 'MMM d, y' }}
+                      </span>
+                      <span class="p-task-details__time">
+                        {{ createdAt | date: 'h:mm a' }}
+                      </span>
+                    </span>
+                  }
+
+                </div>
 
               </div>
 
@@ -82,69 +113,7 @@
               {{ task.desc }}
             </p>
 
-            <mat-divider class="c-card__divider"></mat-divider>
-
-            <div class="p-task-details__info">
-
-              <div class="c-info-box">
-
-                <mat-icon class="c-info-box__icon">
-                  tag
-                </mat-icon>
-
-                <div class="c-info-box__content">
-
-                  <small class="c-info-box__label">
-                    Task ID
-                  </small>
-
-                  <strong class="c-info-box__value">
-                    {{ task.id }}
-                  </strong>
-
-                </div>
-
-              </div>
-
-              <div class="c-info-box">
-
-                <mat-icon class="c-info-box__icon">
-                  calendar_today
-                </mat-icon>
-
-                <div class="c-info-box__content">
-
-                  <small class="c-info-box__label">
-                    Created At
-                  </small>
-
-                  <strong class="c-info-box__value">
-                    {{ createdAt | date: 'medium' }}
-                  </strong>
-
-                </div>
-
-              </div>
-
-            </div>
-
           </mat-card-content>
-
-          <mat-card-actions class="c-card__actions">
-
-            <a
-              mat-raised-button
-              routerLink="/tasks"
-              class="c-button is-primary"
-            >
-              <mat-icon class="c-button__icon">
-                arrow_back
-              </mat-icon>
-
-              Back to Tasks
-            </a>
-
-          </mat-card-actions>
 
         </mat-card>
 
