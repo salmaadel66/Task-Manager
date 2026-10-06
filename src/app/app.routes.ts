@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 
 import { authGuard } from './guards/auth-guard';
+import { taskOwnerGuard } from './guards/task-owner-guard';
+import { guestGuard } from './guards/guest-guard';
 import { Home } from './pages/home/home';
 import { TaskDetails } from './pages/task-details/task-details';
 import { TaskForm } from './pages/task-form/task-form';
@@ -21,11 +23,13 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: Login
+    component: Login,
+    canActivate: [guestGuard]
   },
   {
     path: 'register',
-    component: Register
+    component: Register,
+    canActivate: [guestGuard]
   },
   {
     path: 'add-task',
@@ -35,7 +39,7 @@ export const routes: Routes = [
   {
     path: 'task/:id',
     component: TaskDetails,
-    canActivate: [authGuard]
+    canActivate: [authGuard, taskOwnerGuard]
   },
   {
     path: '**',
