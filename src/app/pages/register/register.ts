@@ -44,8 +44,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class Register {
 
-  authService = inject(AuthService);
-  router = inject(Router);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   hidePassword = signal(true);
   hideConfirmPassword = signal(true);

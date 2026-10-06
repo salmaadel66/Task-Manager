@@ -14,8 +14,13 @@ import { AuthService } from '../../services/auth-service/auth-service';
 })
 export class Navbar {
 
-  authService = inject(AuthService);
-  router = inject(Router);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  user = this.authService.user;
+  tasksLink() {
+    return ['/tasks', this.authService.encodedUid()];
+  }
 
   async logout() {
     await this.authService.logout();

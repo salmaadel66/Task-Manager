@@ -18,7 +18,7 @@
 
                   <a
                     mat-icon-button
-                    routerLink="/tasks"
+                    [routerLink]="tasksLink()"
                     class="p-task-details__back"
                     aria-label="Back to tasks"
                     matTooltip="Back to tasks"
@@ -87,14 +87,14 @@
                     Task {{ task.id }}
                   </span>
 
-                  @if (createdAt) {
+                  @if (task.createdAt) {
                     <span class="p-task-details__date">
                       <mat-icon>calendar_today</mat-icon>
                       <span class="c-info-box__value">
-                        {{ createdAt | date: 'MMM d, y' }}
+                        {{ task.createdAt | date: 'MMM d, y' }}
                       </span>
                       <span class="p-task-details__time">
-                        {{ createdAt | date: 'h:mm a' }}
+                        {{ task.createdAt | date: 'h:mm a' }}
                       </span>
                     </span>
                   }
@@ -145,7 +145,7 @@
 
             <a
               mat-raised-button
-              routerLink="/tasks"
+              [routerLink]="tasksLink()"
               class="c-button is-primary"
             >
               <mat-icon class="c-button__icon">

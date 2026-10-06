@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service/auth-service';
 import { TaskService } from '../../services/task-service/task-service';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,8 +30,9 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class TaskForm {
 
-  service = inject(TaskService);
-  router = inject(Router);
+  private service = inject(TaskService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   taskForm = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -45,12 +47,13 @@ export class TaskForm {
     }
 
     await this.service.addTask({
+      userId: this.authService.user()!.uid,
       title: this.taskForm.value.title ?? '',
       desc: this.taskForm.value.desc ?? '',
       completed: this.taskForm.value.completed ?? false,
       createdAt: new Date()
     });
 
-    this.router.navigate(['/tasks']);
+    this.router.navigate(['/tasks', this.authService.encodedUid()]);
   }
 }

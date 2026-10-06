@@ -20,7 +20,12 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class Home {
 
-  authService = inject(AuthService);
+  private authService = inject(AuthService);
+
+  user = this.authService.user;
+  tasksLink() {
+    return ['/tasks', this.authService.encodedUid()];
+  }
 
   features = [
     {

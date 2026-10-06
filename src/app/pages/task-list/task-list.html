@@ -17,14 +17,14 @@
   </div>
 
 
-  @if (!taskService.loaded()) {
+  @if (!loaded()) {
 
     <div class="p-task-list__loading" role="status">
       <mat-spinner diameter="44"></mat-spinner>
       <span>Loading your tasks…</span>
     </div>
 
-  } @else if (taskService.tasks().length === 0) {
+  } @else if (tasks().length === 0) {
 
     <mat-card class="c-card is-auto-height c-empty-state">
 
@@ -90,14 +90,15 @@
 
   <div class="row g-4">
 
-    @for (task of taskService.tasks(); track task.id; let i = $index) {
+    @for (task of tasks(); track task.id; let i = $index) {
 
       <div class="col-12 col-md-6 col-lg-4">
 
       <mat-card
         class="c-card c-task-card is-interactive"
         [style.animation-delay.ms]="i * 70"
-        [routerLink]="['/task', task.id]"
+        [routerLink]="taskLink()"
+        [state]="{ task }"
       >
 
         <mat-card-content class="c-task-card__content">
@@ -152,7 +153,10 @@
 
 
           <p
+            #desc
+            #tip="matTooltip"
             class="c-task-card__description"
+            (mouseenter)="tip.disabled = desc.scrollHeight <= desc.clientHeight"
             [matTooltip]="task.desc"
             matTooltipPosition="above"
             matTooltipClass="c-tooltip"
@@ -188,7 +192,7 @@
 </div>
 
 
-@if (taskService.tasks().length > 0) {
+@if (tasks().length > 0) {
 
   <div class="p-task-list__actions">
 

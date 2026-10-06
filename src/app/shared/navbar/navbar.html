@@ -41,13 +41,13 @@
 
         </li>
 
-        @if (authService.user()) {
+        @if (user()) {
 
           <li class="nav-item">
 
             <a
               class="nav-link m-navbar__link"
-              routerLink="/tasks"
+              [routerLink]="tasksLink()"
               routerLinkActive="is-active"
             >
               Task List

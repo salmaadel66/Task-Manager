@@ -13,11 +13,11 @@
 
     <div class="c-page-header__actions d-flex flex-wrap gap-2">
 
-      @if (authService.user()) {
+      @if (user()) {
 
         <a
           mat-raised-button
-          routerLink="/tasks"
+          [routerLink]="tasksLink()"
           class="c-button is-light"
         >
           View Tasks

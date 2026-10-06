@@ -1,8 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
-import { TaskService, toDate } from '../../services/task-service/task-service';
+import { AuthService } from '../../services/auth-service/auth-service';
+import { Task } from '../../services/task-service/task-service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -28,14 +29,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class TaskDetails {
 
-  taskService = inject(TaskService);
-  route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
 
-  taskId = Number(this.route.snapshot.paramMap.get('id'));
-
-  task = this.taskService.getTaskById(this.taskId);
-
-  get createdAt(): Date | null {
-    return this.task?.createdAt ? toDate(this.task.createdAt) : null;
+  tasksLink() {
+    return ['/tasks', this.authService.encodedUid()];
   }
+
+  task: Task | undefined = history.state?.task;
+
 }

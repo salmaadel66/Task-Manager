@@ -6,7 +6,7 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
  * guards would send the Login page before the client redirects back.
  */
 export const serverRoutes: ServerRoute[] = [
-  { path: 'tasks', renderMode: RenderMode.Client },
+  { path: 'tasks/:id', renderMode: RenderMode.Client },
   { path: 'add-task', renderMode: RenderMode.Client },
   { path: 'task/:id', renderMode: RenderMode.Client },
   { path: 'login', renderMode: RenderMode.Client },

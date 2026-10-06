@@ -6,6 +6,7 @@ import {
   AuthService,
   authErrorMessage
 } from '../../services/auth-service/auth-service';
+import { TaskService } from '../../services/task-service/task-service';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,17 +30,18 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class Login {
 
-  authService = inject(AuthService);
-  router = inject(Router);
+  private authService = inject(AuthService);
+  private taskService = inject(TaskService);
+  private router = inject(Router);
 
   hidePassword = signal(true);
   loading = signal(false);
   errorMessage = signal('');
   successMessage = signal('');
 
-  email = '';
+  email = this.authService.getRememberedEmail();
   password = '';
-  rememberMe = false;
+  rememberMe = this.email !== '';
 
   async onSubmit(form: NgForm) {
 
@@ -52,11 +54,13 @@ export class Login {
     this.errorMessage.set('');
 
     try {
-      await this.authService.login(
+      let result = await this.authService.login(
         this.email,
         this.password,
         this.rememberMe
       );
+
+      await this.taskService.loadTasks(result.user.uid);
 
       this.router.navigate(['/']);
 
@@ -70,7 +74,7 @@ export class Login {
 
   async onForgotPassword(form: NgForm) {
 
-    const emailControl = form.controls['email'];
+    let emailControl = form.controls['email'];
 
     if (emailControl.invalid) {
       emailControl.markAsTouched();

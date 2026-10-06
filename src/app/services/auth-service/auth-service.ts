@@ -1,5 +1,5 @@
 
-import { DestroyRef, Injectable, inject, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 import {
   User,
@@ -70,19 +70,15 @@ export class AuthService {
 
   user = signal<User | null>(null);
 
-  ready: Promise<void>;
-
   constructor() {
-    const destroyRef = inject(DestroyRef);
-
-    this.ready = new Promise<void>(resolve => {
-      const unsubscribe = onAuthStateChanged(auth, user => {
-        this.user.set(user);
-        resolve();
-      });
-
-      destroyRef.onDestroy(unsubscribe);
+    onAuthStateChanged(auth, user => {
+      this.user.set(user);
     });
+  }
+
+  async waitForUser() {
+    await auth.authStateReady();
+    this.user.set(auth.currentUser);
   }
 
   async login(
@@ -92,8 +88,10 @@ export class AuthService {
   ) {
     if (rememberMe) {
       await setPersistence(auth, browserLocalPersistence);
+      localStorage.setItem('rememberedEmail', email);
     } else {
       await setPersistence(auth, browserSessionPersistence);
+      localStorage.removeItem('rememberedEmail');
     }
 
     return signInWithEmailAndPassword(
@@ -103,8 +101,18 @@ export class AuthService {
     );
   }
 
+  getRememberedEmail() {
+    let email = localStorage.getItem('rememberedEmail');
+
+    if (email) {
+      return email;
+    }
+
+    return '';
+  }
+
   async register(data: RegisterData) {
-    const result = await createUserWithEmailAndPassword(
+    let result = await createUserWithEmailAndPassword(
       auth,
       data.email,
       data.password
@@ -127,7 +135,23 @@ export class AuthService {
     await signOut(auth);
   }
 
+  encodedUid() {
+    let user = this.user();
+
+    if (!user) {
+      return '';
+    }
+
+    return btoa(user.uid);
+  }
+
   logout() {
+    let user = this.user();
+
+    if (user) {
+      localStorage.removeItem('tasks-' + user.uid);
+    }
+
     return signOut(auth);
   }
 
